@@ -4,14 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha --require babel-register tests/*.js --exit"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "express": "^4.16.4",
     "lodash": "^4.17.11",
-    "mongoose": "^5.4.13"
+    "mocha": "^5.2.0",
+    "mongoose": "^5.4.13",
+    "nodemon": "^1.18.10"
   }
 }
