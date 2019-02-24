@@ -11,6 +11,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import history from './history';
 import reducers from './reducers';
 
+import Login from './Components/Login/LoginComponent';
+import RegisterComponent from './Components/Register/RegisterComponent';
+
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
 ReactDOM.render(
@@ -19,6 +22,8 @@ ReactDOM.render(
         <div>
             <Switch>
                 <Route exact path="/" component={App}/>
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={RegisterComponent} />
             </Switch>
         </div>
         </Router>
