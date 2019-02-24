@@ -13,6 +13,7 @@ import reducers from './reducers';
 
 import Login from './Components/Login/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
+import ProfileComponent from './Components/ProfileComponent';
 
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
 
@@ -24,6 +25,7 @@ ReactDOM.render(
                 <Route exact path="/" component={App}/>
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={RegisterComponent} />
+                <Route exact path="/profile" component={ProfileComponent} />
             </Switch>
         </div>
         </Router>
