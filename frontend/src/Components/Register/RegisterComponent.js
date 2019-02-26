@@ -1,24 +1,47 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
-import { Button} from "react-bootstrap";
 import './RegisterStyle.css';
-import {register} from '../../actions/registerUser';
+import {register} from '../../actions/userActions';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import history from '../../history';
+import { Dropdown } from 'react-bootstrap';
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 
 class RegisterComponent extends Component{
   constructor(props){
     super(props);
     this.state = {
       name: '',
-      email: '',
-      username: '',
+			email: '',
+			degree: '',
+			domain: '',
+			yearsOfExperience: '',
+			salaryRange: '',
       password: '',
-      confirm: ''
+			confirm: '',
+			userInformation: {
+				degree: {
+					computerScience: 'Computer Science'
+				},
+				domain: {
+					cloud: 'Cloud Computing',
+					frontend: 'Front End'
+				},
+				yearsOfExperience: {
+					none: 'None',
+					junior: '1-3 Years'
+				},
+				salaryRange: {
+					low: '20k - 30k',
+					medium: '70k-80k',
+					high: '100k-120k'
+				}
+			}
     };
 		this.registerUser = this.registerUser.bind(this);
-		this.updateInfo = this.updateInfo.bind(this);
+		this.getChoices = this.getChoices.bind(this);
+		this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidUpdate(){
@@ -27,9 +50,10 @@ class RegisterComponent extends Component{
     }
   }
 
-  updateInfo(event) {
-		const { target: { name, value } } = event
-  	this.setState({ [name]: value })
+  handleChange(event) {
+		this.setState({
+      [event.target.id]: event.target.value
+    });
   }
 
 	registerUser(event){
@@ -37,82 +61,131 @@ class RegisterComponent extends Component{
 		if(this.state.password !== this.state.confirm){
 			return console.log('Passwords are not the same');
 		}
-		this.props.register(this.state);
+		this.props.register({
+			name: this.state.name,
+			email: this.state.email,
+			degree: this.state.degree,
+			domain: this.state.domain,
+			yearsOfExperience: this.state.yearsOfExperience,
+			salaryRange: this.state.salaryRange,
+      password: this.state.password
+		});
+	}
+
+	getChoices(catagory) {
+		let info = this.state.userInformation[catagory];
+		return Object.keys(info).map((keyName, i) => (
+			<Dropdown.Item key={i} onClick={() => this.setState({[catagory] : info[keyName]})}>{info[keyName]}</Dropdown.Item>
+		));
 	}
 
   render(){
     return(
 			
-      <div className="container RegisterComponent">
-			<div className="row main">
-				<div className="main-login main-center">
-				<h5>Join Jobr today</h5>
-					<form onSubmit={this.registerUser}>
-						<div className="form-group">
-							<label htmlFor="name" className="cols-sm-2 control-label">Your Name</label>
-							<div className="cols-sm-10">
-								<div className="input-group">
-									<span className="input-group-addon"><i className="fa fa-user fa" aria-hidden="true"></i></span>
-									<input type="text" className="form-control" name="name" id="name" placeholder="Enter your Name"
-                  value={this.state.name} onChange={this.updateInfo.bind(this)}/>
-								</div>
-							</div>
-						</div>
-						<div className="form-group">
-							<label htmlFor="email" className="cols-sm-2 control-label">Your Email</label>
-							<div className="cols-sm-10">
-								<div className="input-group">
-									<span className="input-group-addon"><i className="fa fa-envelope fa" aria-hidden="true"></i></span>
-									<input type="text" className="form-control" name="email" id="email"  placeholder="Enter your Email"
-                  value={this.state.email} onChange={this.updateInfo.bind(this)}/>
-								</div>
-							</div>
-						</div>
+      <div className="Login bg-gray">
+        <h2> <center> <strong> Jobr Registration  </strong></center> </h2>
+        <form onSubmit={this.handleSubmit}>
 
-						<div className="form-group">
-							<label htmlFor="username" className="cols-sm-2 control-label">Username</label>
-							<div className="cols-sm-10">
-								<div className="input-group">
-									<span className="input-group-addon"><i className="fa fa-users fa" aria-hidden="true"></i></span>
-									<input type="text" className="form-control" name="username" id="username"  placeholder="Enter your Username"
-                  value={this.state.username} onChange={this.updateInfo.bind(this)}/>
-								</div>
-							</div>
-						</div>
+				<FormGroup controlId="name" bssize="large">
+            <FormLabel>name</FormLabel>
+            <FormControl
+              autoFocus
+              type="text"
+              value={this.state.name}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
 
-						<div className="form-group">
-							<label htmlFor="password" className="cols-sm-2 control-label">Password</label>
-							<div className="cols-sm-10">
-									<span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-                  <div className="input-group">
-									<input type="password" className="form-control" name="password" id="password"  placeholder="Enter your Password"
-                  value={this.state.password} onChange={this.updateInfo.bind(this)}/>
-								</div>
-							</div>
-						</div>
+          <FormGroup controlId="email" bssize="large">
+            <FormLabel>Email</FormLabel>
+            <FormControl
+              autoFocus
+              type="email"
+              value={this.state.email}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
 
-						<div className="form-group">
-							<label htmlFor="confirm" className="cols-sm-2 control-label">Confirm Password</label>
-              <div className="cols-sm-10">
-              <div className="input-group">
-									<span className="input-group-addon"><i className="fa fa-lock fa-lg" aria-hidden="true"></i></span>
-									<input type="password" className="form-control" name="confirm" id="confirm"  placeholder="Confirm your Password"
-                  value={this.state.confirm} onChange={this.updateInfo.bind(this)}/>
-								</div>
-							</div>
-						</div>
+					<Dropdown>
+							<Dropdown.Toggle>
+								Your Degree
+							</Dropdown.Toggle>
 
-						<div className="form-group">
-							<button target="_blank" id="button" className="btn btn-primary btn-lg btn-block login-button">Register</button>
-						</div>
+							<Dropdown.Menu>
+								{this.getChoices('degree')}
+							</Dropdown.Menu>
+						</Dropdown>
 
-            <div className="form-group">
-              <Link to="/"><Button>Cancel</Button></Link>
-            </div>
-					</form>
-				</div>
-			</div>
-		</div>
+						<Dropdown>
+							<Dropdown.Toggle>
+								Your Domain
+							</Dropdown.Toggle>
+
+							<Dropdown.Menu>
+								{this.getChoices('domain')}
+							</Dropdown.Menu>
+						</Dropdown>
+
+						<Dropdown>
+							<Dropdown.Toggle>
+								Your Years of Experience
+							</Dropdown.Toggle>
+
+							<Dropdown.Menu>
+								{this.getChoices('yearsOfExperience')}
+							</Dropdown.Menu>
+						</Dropdown>
+
+
+						<Dropdown>
+							<Dropdown.Toggle>
+								Your Salary Range
+							</Dropdown.Toggle>
+
+							<Dropdown.Menu>
+								{this.getChoices('salaryRange')}
+							</Dropdown.Menu>
+						</Dropdown>
+
+          <FormGroup controlId="password" bssize="large">
+            <FormLabel>Password</FormLabel>
+            <FormControl
+              value={this.state.password}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+
+					<FormGroup controlId="confirm" bssize="large">
+            <FormLabel>Confirm Password</FormLabel>
+            <FormControl
+              value={this.state.confirm}
+              onChange={this.handleChange}
+              type="password"
+            />
+          </FormGroup>
+
+        </form>
+        <br />
+        <form className="form-inline my-2 my-lg-1">
+        	<Button
+            block
+						bssize = "medium"
+						onClick={this.registerUser}
+            type="Register">
+            Register
+          </Button>
+        </form>
+        <form className="form-inline my-2 my-lg-0">
+          <Link to="/"><Button
+            block
+            bssize = "medium"
+            type="Cancel">
+            Cancel
+          </Button></Link>
+        </form>
+        
+      </div>
     )
   }
 }

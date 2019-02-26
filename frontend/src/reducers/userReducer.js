@@ -10,7 +10,7 @@ const initialStateLoggedIn = {
   userInfo: {name: 'William'}
 };
 
-export default function(state = initialStateLoggedIn, action) {
+export default function(state = initialState, action) {
     switch(action.type){
         case LOGGED_IN:
           if(action.error){

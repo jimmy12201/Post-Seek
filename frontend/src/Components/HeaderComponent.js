@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { signOut } from '../actions/userActions';
+import { bindActionCreators } from 'redux';
 
 class HeaderComponent extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ class HeaderComponent extends Component {
                     <span><strong>{this.props.user.userInfo.name}</strong></span>
                     <form className="form-inline my-2 my-lg-0">
                     <Link to="/profile"><button className="btn btn-outline-success my-2 my-sm-0 m-2" type="submit">Profile</button></Link>
-                    <Link to="/"><button className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></Link>
+                    <Link to="/"><button onClick={this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></Link>
                   </form>
                 </div>
             )
@@ -56,4 +58,8 @@ function mapStateToProps({ user }) {
     return { user };
 }
 
-export default connect(mapStateToProps)(HeaderComponent);
+function mapDispatchToProps(dispatch){
+	return bindActionCreators({signOut}, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
