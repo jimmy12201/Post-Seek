@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import history from '../../history';
 import { Dropdown } from 'react-bootstrap';
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import choices from '../../Constants/choices'
 
 class RegisterComponent extends Component{
   constructor(props){
@@ -20,24 +21,7 @@ class RegisterComponent extends Component{
 			salaryRange: '',
       password: '',
 			confirm: '',
-			userInformation: {
-				degree: {
-					computerScience: 'Computer Science'
-				},
-				domain: {
-					cloud: 'Cloud Computing',
-					frontend: 'Front End'
-				},
-				yearsOfExperience: {
-					none: 'None',
-					junior: '1-3 Years'
-				},
-				salaryRange: {
-					low: '20k - 30k',
-					medium: '70k-80k',
-					high: '100k-120k'
-				}
-			}
+			userInformation: choices
     };
 		this.registerUser = this.registerUser.bind(this);
 		this.getChoices = this.getChoices.bind(this);

@@ -1,13 +1,27 @@
 import React, { Component } from 'react';
+import choices from '../Constants/choices'
 
 class ProfileComponent extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            name: '',
+            email: '',
+            degree: '',
+            domain: '',
+            yearsOfExperience: '',
+            salaryRange: '',
+            password: '',
+            confirm: '',
+            userInformation: choices
+          };
     }
 
     render() {
         return (
-            <h1>Profile</h1>
+            <div>
+                <h1>Profile</h1>
+            </div>
         );
     }
 }

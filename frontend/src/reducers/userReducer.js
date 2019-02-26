@@ -5,11 +5,6 @@ const initialState = {
     userInfo: {}
 };
 
-const initialStateLoggedIn = {
-  loggedIn: true,
-  userInfo: {name: 'William'}
-};
-
 export default function(state = initialState, action) {
     switch(action.type){
         case LOGGED_IN:
