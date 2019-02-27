@@ -116,5 +116,16 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "axios": "^0.18.0",
+    "bootstrap": "^4.3.1",
+    "history": "^4.7.2",
+    "react-bootstrap": "^1.0.0-beta.5",
+    "react-redux": "^6.0.1",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "redux": "^4.0.1",
+    "redux-promise": "^0.6.0"
   }
 }
