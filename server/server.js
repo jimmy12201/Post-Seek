@@ -1,8 +1,6 @@
 require('./config/config');
 const express = require('express');
 const bodyParser = require('body-parser');
-const _ = require('lodash');
-const mongoose = require('./db/mongoose');
 const app = express();
 const port = process.env.PORT;
 
@@ -29,4 +27,4 @@ app.use('/user/', require('./routes/user'));
 
 app.listen(port, () => {
     console.log(`app is listening on port ${port}`);
-})
+});
