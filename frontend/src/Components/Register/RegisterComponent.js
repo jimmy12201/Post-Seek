@@ -6,8 +6,8 @@ import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import history from '../../history';
 import { Dropdown } from 'react-bootstrap';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import choices from '../../Constants/choices'
+import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
+import choices from '../../Constants/choices';
 
 class RegisterComponent extends Component{
   constructor(props){
@@ -44,7 +44,8 @@ class RegisterComponent extends Component{
 		event.preventDefault();
 		if(this.state.password !== this.state.confirm){
 			return console.log('Passwords are not the same');
-		}
+    }
+    console.log(this.state);
 		this.props.register({
 			name: this.state.name,
 			email: this.state.email,

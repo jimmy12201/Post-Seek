@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import choices from '../Constants/choices'
+import choices from '../Constants/choices';
+import _ from 'lodash';
 
 class ProfileComponent extends Component {
     constructor(props) {
