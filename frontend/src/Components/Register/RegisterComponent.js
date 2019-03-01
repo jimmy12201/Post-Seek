@@ -153,10 +153,10 @@ class RegisterComponent extends Component{
         </form>
         <br />
         <form className="form-inline my-2 my-lg-1">
-        	<Button
+          <Button
             block
-						bssize = "medium"
-						onClick={this.registerUser}
+            bssize = "medium"
+            onClick={this.registerUser}
             type="Register">
             Register
           </Button>

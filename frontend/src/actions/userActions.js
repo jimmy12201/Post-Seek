@@ -10,7 +10,7 @@ export function signIn(user){
     type: LOGGED_IN,
     payload: request
   }
-};
+}
 
 export function register(user){
   const url = `${ROOT_URL}/register`;
@@ -19,10 +19,10 @@ export function register(user){
     type: REGISTER_USER,
     payload: request
   }
-};
+}
 
 export function signOut(){
   return {
     type: LOGGED_OUT
   }
-};
+}
