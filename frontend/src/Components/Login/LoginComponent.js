@@ -6,10 +6,9 @@ import {Redirect} from 'react-router';
 import { bindActionCreators } from 'redux';
 import { signIn } from '../../actions/userActions';
 import "./login.css";
-import history from '../../history';
 
 
-class Login extends Component {
+class LoginComponent extends Component {
   constructor(props) {
     super(props);
 
@@ -17,11 +16,14 @@ class Login extends Component {
       email: "",
       password: ""
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentDidUpdate(){
       if(this.props.user.loggedIn){
-          history.push('/');
+          this.props.history.push('/');
       }
   }
 
@@ -106,4 +108,4 @@ function mapDispatchToProps(dispatch){
   return bindActionCreators({signIn}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

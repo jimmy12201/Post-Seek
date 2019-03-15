@@ -3,32 +3,32 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { Route, Switch, Router } from 'react-router-dom';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
-import ReduxPromise from 'redux-promise';
+import { PersistGate } from 'redux-persist/integration/react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import history from './history';
-import reducers from './reducers';
 
-import Login from './Components/Login/LoginComponent';
+import LoginComponent from './Components/Login/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
 import ProfileComponent from './Components/ProfileComponent';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+import { store, persistor } from './configureStore';
+
 
 ReactDOM.render(
-    <Provider store={ createStoreWithMiddleware(reducers) }>
-        <Router history={ history }>
-        <div>
-            <Switch>
-                <Route exact path="/" component={App}/>
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={RegisterComponent} />
-                <Route exact path="/profile" component={ProfileComponent} />
-            </Switch>
-        </div>
-        </Router>
+    <Provider store={ store }>
+        <PersistGate loading={null} persistor={persistor}>
+            <BrowserRouter>
+                <div>
+                    <Switch>
+                        <Route exact path="/" component={App}/>
+                        <Route exact path="/login" component={LoginComponent} />
+                        <Route exact path="/register" component={RegisterComponent} />
+                        <Route exact path="/profile" component={ProfileComponent} />
+                    </Switch>
+                </div>
+            </BrowserRouter>
+        </PersistGate>
     </Provider>
 , document.getElementById('root'));
 

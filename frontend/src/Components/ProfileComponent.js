@@ -1,30 +1,41 @@
 import React, { Component } from 'react';
 import choices from '../Constants/choices';
-import _ from 'lodash';
+import { connect } from 'react-redux';
+
+import HeaderComponent from './HeaderComponent';
+import RegisterComponent from './Register/RegisterComponent';
+import history from '../history';
 
 class ProfileComponent extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            name: '',
-            email: '',
-            degree: '',
-            domain: '',
-            yearsOfExperience: '',
-            salaryRange: '',
-            password: '',
-            confirm: '',
-            userInformation: choices
-          };
+        // this.state = {
+        //     name: '',
+        //     email: '',
+        //     degree: '',
+        //     domain: '',
+        //     yearsOfExperience: '',
+        //     salaryRange: '',
+        //     password: '',
+        //     confirm: '',
+        //     userInformation: choices
+        //   };
+
+        console.log(this.props.userInfo);
     }
 
     render() {
         return (
             <div>
-                <h1>Profile</h1>
+                <HeaderComponent />
+                <RegisterComponent />
             </div>
         );
     }
 }
 
-export default ProfileComponent;
+function mapStateToProps({user}){
+    return {user};
+}
+
+export default connect(mapStateToProps) (ProfileComponent);

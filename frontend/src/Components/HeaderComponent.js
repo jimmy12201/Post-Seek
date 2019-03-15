@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { signOut } from '../actions/userActions';
 import { bindActionCreators } from 'redux';
@@ -7,17 +7,31 @@ import { bindActionCreators } from 'redux';
 class HeaderComponent extends Component {
     constructor(props) {
         super(props);
-        this.renderSignIn = this.renderSignIn(this);
+        this.goToProfile = this.goToProfile.bind(this);
     }
 
+    goToProfile(event) {
+      event.preventDefault();
+      this.props.history.push('/profile');
+    }
+
+    componentDidUpdate(){
+      this.props.history.push('/');
+  }
+
+    signOut(event) {
+      this.props.signOut();
+    }
+
+    
     renderSignIn() {
         if (this.props.user.loggedIn) {
             return (
                 <div>
                     <span><strong>{this.props.user.userInfo.name}</strong></span>
                     <form className="form-inline my-2 my-lg-0">
-                    <Link to="/profile"><button className="btn btn-outline-success my-2 my-sm-0 m-2" type="submit">Profile</button></Link>
-                    <Link to="/"><button onClick={this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button></Link>
+                    <button onClick={this.goToProfile} className="btn btn-outline-success my-2 my-sm-0 m-2" type="submit">Profile</button>
+                    <button onClick={() => this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
                   </form>
                 </div>
             )
@@ -41,12 +55,8 @@ class HeaderComponent extends Component {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul className="navbar-nav mr-auto">
     
-                    {/* <li className="nav-item active">
-                      <Link className="navbar-brand" to="/eventform">Add Events <span className="sr-only">(current)</span></Link>
-                    </li> */}
-    
                   </ul>
-                  {this.renderSignIn}
+                  {this.renderSignIn()}
                 </div>
             </nav>
           </div>
@@ -62,4 +72,4 @@ function mapDispatchToProps(dispatch){
 	return bindActionCreators({signOut}, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderComponent);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(HeaderComponent));

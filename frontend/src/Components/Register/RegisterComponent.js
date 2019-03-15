@@ -12,17 +12,33 @@ import choices from '../../Constants/choices';
 class RegisterComponent extends Component{
   constructor(props){
     super(props);
-    this.state = {
-      name: '',
-			email: '',
-			degree: '',
-			domain: '',
-			yearsOfExperience: '',
-			salaryRange: '',
-      password: '',
-			confirm: '',
-			userInformation: choices
-    };
+    console.log(this.props);
+    if (this.props.user.loggedIn) {
+      this.state = {
+        name: this.props.user.userInfo.name,
+        email: this.props.user.userInfo.email,
+        degree: this.props.user.userInfo.degree,
+        domain: this.props.user.userInfo.domain,
+        yearsOfExperience: this.props.user.userInfo.yearsOfExperience,
+        salaryRange: this.props.user.userInfo.salaryRange,
+        password: this.props.user.userInfo.password,
+        confirm: this.props.user.userInfo.confirm,
+        userInformation: choices
+      };
+    } else {
+      this.state = {
+        name: '',
+        email: '',
+        degree: '',
+        domain: '',
+        yearsOfExperience: '',
+        salaryRange: '',
+        password: '',
+        confirm: '',
+        userInformation: choices
+      };
+    }
+
 		this.registerUser = this.registerUser.bind(this);
 		this.getChoices = this.getChoices.bind(this);
 		this.handleChange = this.handleChange.bind(this);
@@ -30,7 +46,7 @@ class RegisterComponent extends Component{
 
   componentDidUpdate(){
     if(this.props.user.loggedIn){
-        history.push('/');
+        this.props.history.push('/');
     }
   }
 
@@ -65,14 +81,29 @@ class RegisterComponent extends Component{
 	}
 
   render(){
+    let headerText;
+
+    if (this.props.user.loggedIn) {
+      headerText = "Profile";
+    } else {
+      headerText = "Jobr Registration";
+    }
+
+    let submitText;
+    if (this.props.user.loggedIn) {
+      submitText = "Update Profile";
+    } else {
+      submitText = "Register";
+    }
+
     return(
 			
       <div className="Login bg-gray">
-        <h2> <center> <strong> Jobr Registration  </strong></center> </h2>
+        <h2> <center> <strong>  {headerText} </strong></center> </h2>
         <form onSubmit={this.handleSubmit}>
 
 				<FormGroup controlId="name" bssize="large">
-            <FormLabel>name</FormLabel>
+            <FormLabel>Name</FormLabel>
             <FormControl
               autoFocus
               type="text"
@@ -132,24 +163,6 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
-          <FormGroup controlId="password" bssize="large">
-            <FormLabel>Password</FormLabel>
-            <FormControl
-              value={this.state.password}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-
-					<FormGroup controlId="confirm" bssize="large">
-            <FormLabel>Confirm Password</FormLabel>
-            <FormControl
-              value={this.state.confirm}
-              onChange={this.handleChange}
-              type="password"
-            />
-          </FormGroup>
-
         </form>
         <br />
         <form className="form-inline my-2 my-lg-1">
@@ -158,7 +171,7 @@ class RegisterComponent extends Component{
             bssize = "medium"
             onClick={this.registerUser}
             type="Register">
-            Register
+            {submitText}
           </Button>
         </form>
         <form className="form-inline my-2 my-lg-0">
