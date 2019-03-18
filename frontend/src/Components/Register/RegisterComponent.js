@@ -66,7 +66,7 @@ class RegisterComponent extends Component{
         yearsOfExperience: this.state.yearsOfExperience,
         salaryRange: this.state.salaryRange,
       }).then((user) => {
-        console.log(user);
+        console.log(this.props);
         this.props.history.push('/');
       });
     } else {
@@ -147,7 +147,7 @@ class RegisterComponent extends Component{
 			
       <div className="Login bg-gray">
         <h2> <center> <strong>  {headerText} </strong></center> </h2>
-        <form>
+        <form onSubmit={this.registerUser}>
 
 				<FormGroup controlId="name" bssize="large">
             <FormLabel>Name</FormLabel>
@@ -169,7 +169,7 @@ class RegisterComponent extends Component{
             />
           </FormGroup>
 
-					<Dropdown>
+					<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{degreeText}
 							</Dropdown.Toggle>
@@ -179,7 +179,7 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
-						<Dropdown>
+						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{domainText}
 							</Dropdown.Toggle>
@@ -189,7 +189,7 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
-						<Dropdown>
+						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{yearsOfExperienceText}
 							</Dropdown.Toggle>
@@ -200,7 +200,7 @@ class RegisterComponent extends Component{
 						</Dropdown>
 
 
-						<Dropdown>
+						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{salaryRangeText}
 							</Dropdown.Toggle>
@@ -212,28 +212,25 @@ class RegisterComponent extends Component{
 
             {this.renderPassword()}
 
-        </form>
-
-        
-
-        <br />
-        <form className="form-inline my-2 my-lg-1">
           <Button
             block
+            className="form-inline my-2 my-lg-1"
             bssize = "medium"
-            onClick={this.registerUser}
-            type="Register">
+            // onClick={this.registerUser}
+            type="submit">
             {submitText}
           </Button>
-        </form>
-        <form className="form-inline my-2 my-lg-0">
+
           <Link to="/"><Button
             block
+            className="form-inline my-2 my-lg-0"
             bssize = "medium"
             type="Cancel">
             Cancel
           </Button></Link>
         </form>
+
+  
         
       </div>
     )
