@@ -1,4 +1,4 @@
-import { LOGGED_IN, LOGGED_OUT, REGISTER_USER } from '../actions/actionTypes.js';
+import { LOGGED_IN, LOGGED_OUT, REGISTER_USER, UPDATE_USER } from '../actions/actionTypes.js';
 
 const initialState = {
     loggedIn: false,
@@ -11,6 +11,7 @@ export default function(state = initialState, action) {
           if(action.error){
             return state;
           }
+          console.log(action.payload.data);
           return {
             loggedIn: true,
             userInfo: action.payload.data
@@ -21,6 +22,14 @@ export default function(state = initialState, action) {
             userInfo: {}
           };
         case REGISTER_USER:
+          if(action.error){
+            return state;
+          }
+          return {
+            loggedIn: true,
+            userInfo: action.payload.data
+          };
+        case UPDATE_USER:
           if(action.error){
             return state;
           }

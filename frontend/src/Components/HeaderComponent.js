@@ -17,7 +17,7 @@ class HeaderComponent extends Component {
 
     componentDidUpdate(){
       this.props.history.push('/');
-  }
+    }
 
     signOut(event) {
       this.props.signOut();
@@ -48,7 +48,7 @@ class HeaderComponent extends Component {
           return (
           <div>
             <nav className="navbar navbar-expand-lg navbar-light bg-light ">
-                <Link className="navbar-brand" to="/">Jobr</Link>
+                <Link className="navbar-brand" to="/">Post-Seek</Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>

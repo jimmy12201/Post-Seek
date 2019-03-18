@@ -15,7 +15,6 @@ router.get('/all', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    console.log(req.body.name);
     let user = new User({
         name: req.body.name,
         email : req.body.email,
@@ -23,15 +22,41 @@ router.post('/register', (req, res) => {
         degree: req.body.degree,
         domain: req.body.domain,
         yearsOfExperience: req.body.yearsOfExperience,
-        salaryRange: req.body.salaryRange,
+        salaryRange: req.body.salaryRange
     });
 
     user.save().then((user) => {
-        res.send({user});
+        console.log(user);
+        res.send(user);
     }).catch((e) => {
         console.log(e);
         res.status(400).send();
     });
+});
+
+router.put('/update', (req, res) => {
+    
+    User.findOne({
+        email: req.body.emailPrev
+    }).then((user) => {
+        User.findByIdAndUpdate(user._id, {$set: {
+            name: req.body.name,
+            email : req.body.email,
+            degree: req.body.degree,
+            domain: req.body.domain,
+            yearsOfExperience: req.body.yearsOfExperience,
+            salaryRange: req.body.salaryRange
+        }}, {new: true})
+    .then((user) => {
+        if (!user) {
+            return res.status(404).send();
+        }
+
+        return res.send(user);
+    }).catch((err) => {
+        res.status(400).send(e);
+    })});
+
 });
 
 router.post('/signIn', (req, res) => {

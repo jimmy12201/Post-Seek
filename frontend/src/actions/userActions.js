@@ -1,4 +1,4 @@
-import {LOGGED_IN, LOGGED_OUT, REGISTER_USER} from './actionTypes';
+import {LOGGED_IN, LOGGED_OUT, REGISTER_USER, UPDATE_USER} from './actionTypes';
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:8080/user';
@@ -17,6 +17,15 @@ export function register(user){
   const request = axios.post(url,user);
   return {
     type: REGISTER_USER,
+    payload: request
+  }
+}
+
+export function update(user){
+  const url = `${ROOT_URL}/update`;
+  const request = axios.put(url,user);
+  return {
+    type: UPDATE_USER,
     payload: request
   }
 }

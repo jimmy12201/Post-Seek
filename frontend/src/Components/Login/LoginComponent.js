@@ -21,12 +21,6 @@ class LoginComponent extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  componentDidUpdate(){
-      if(this.props.user.loggedIn){
-          this.props.history.push('/');
-      }
-  }
-
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
   }
@@ -39,19 +33,19 @@ class LoginComponent extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log(this.state);
-    console.log(this.props.user);
-    this.props.signIn(this.state);
+    this.props.signIn(this.state).then(() => {
+      this.props.history.push('/');
+    });
   }
 
   render() {
 
-    if(this.props.user.isLoggedIn){
-      return <Redirect to="/" />
-    }
+    // if(this.props.user.isLoggedIn){
+    //   return <Redirect to="/" />
+    // }
     return (
       <div className="Login bg-light">
-        <h2> <center> <strong> Jobr login  </strong></center> </h2>
+        <h2> <center> <strong> Post-Seek login  </strong></center> </h2>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <FormLabel>Email</FormLabel>

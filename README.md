@@ -1,4 +1,4 @@
-# Jobr
+# Post-Seek
 
 You will need node.js installed and two terminals to run this application.
 
