@@ -127,7 +127,7 @@ class RegisterComponent extends Component{
     if (this.props.user.loggedIn) {
       headerText = "Profile";
     } else {
-      headerText = "Jobr Registration";
+      headerText = "Post-Seek Registration";
     }
 
     let submitText;

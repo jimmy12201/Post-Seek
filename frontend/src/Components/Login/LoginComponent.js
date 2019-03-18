@@ -45,7 +45,7 @@ class LoginComponent extends Component {
     // }
     return (
       <div className="Login bg-light">
-        <h2> <center> <strong> Jobr login  </strong></center> </h2>
+        <h2> <center> <strong> Post-Seek login  </strong></center> </h2>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <FormLabel>Email</FormLabel>
