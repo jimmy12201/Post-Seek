@@ -15,7 +15,6 @@ router.get('/all', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    console.log(req.body.name);
     let user = new User({
         name: req.body.name,
         email : req.body.email,
@@ -23,7 +22,7 @@ router.post('/register', (req, res) => {
         degree: req.body.degree,
         domain: req.body.domain,
         yearsOfExperience: req.body.yearsOfExperience,
-        salaryRange: req.body.salaryRange,
+        salaryRange: req.body.salaryRange
     });
 
     user.save().then((user) => {
@@ -32,6 +31,24 @@ router.post('/register', (req, res) => {
         console.log(e);
         res.status(400).send();
     });
+});
+
+router.put('/update', (req, res) => {
+    User.update({email: req.body.emailPrev}, 
+        {$set: {
+            name: req.body.name,
+            email : req.body.email,
+            degree: req.body.degree,
+            domain: req.body.domain,
+            yearsOfExperience: req.body.yearsOfExperience,
+            salaryRange: req.body.salaryRange
+        }}, (err, user) => {
+            if (err) {
+                res.status(400).send();
+            }
+
+            res.send({user});
+        });
 });
 
 router.post('/signIn', (req, res) => {

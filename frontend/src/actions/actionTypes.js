@@ -1,11 +1,11 @@
 const LOGGED_IN = 'LOGGED_IN';
 const LOGGED_OUT = 'LOGGED_OUT';
 const REGISTER_USER = 'REGISTER_USER';
-const SELECT_EVENT = 'SELECT_EVENT';
+const UPDATE_USER = 'UPDATE_USER';
 
 module.exports = {
     LOGGED_IN,
     LOGGED_OUT,
     REGISTER_USER,
-    SELECT_EVENT
+    UPDATE_USER
 };

@@ -1,10 +1,9 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './RegisterStyle.css';
-import {register} from '../../actions/userActions';
+import {register, update} from '../../actions/userActions';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
-import history from '../../history';
 import { Dropdown } from 'react-bootstrap';
 import { Button, FormGroup, FormControl, FormLabel } from 'react-bootstrap';
 import choices from '../../Constants/choices';
@@ -12,17 +11,17 @@ import choices from '../../Constants/choices';
 class RegisterComponent extends Component{
   constructor(props){
     super(props);
-    console.log(this.props);
     if (this.props.user.loggedIn) {
       this.state = {
         name: this.props.user.userInfo.name,
         email: this.props.user.userInfo.email,
+        emailPrev: this.props.user.userInfo.email,
         degree: this.props.user.userInfo.degree,
         domain: this.props.user.userInfo.domain,
         yearsOfExperience: this.props.user.userInfo.yearsOfExperience,
         salaryRange: this.props.user.userInfo.salaryRange,
         password: this.props.user.userInfo.password,
-        confirm: this.props.user.userInfo.confirm,
+        confirm: this.props.user.userInfo.password,
         userInformation: choices
       };
     } else {
@@ -41,13 +40,8 @@ class RegisterComponent extends Component{
 
 		this.registerUser = this.registerUser.bind(this);
 		this.getChoices = this.getChoices.bind(this);
-		this.handleChange = this.handleChange.bind(this);
-  }
-
-  componentDidUpdate(){
-    if(this.props.user.loggedIn){
-        this.props.history.push('/');
-    }
+    this.handleChange = this.handleChange.bind(this);
+    this.renderPassword = this.renderPassword.bind(this);
   }
 
   handleChange(event) {
@@ -61,16 +55,35 @@ class RegisterComponent extends Component{
 		if(this.state.password !== this.state.confirm){
 			return console.log('Passwords are not the same');
     }
-    console.log(this.state);
-		this.props.register({
-			name: this.state.name,
-			email: this.state.email,
-			degree: this.state.degree,
-			domain: this.state.domain,
-			yearsOfExperience: this.state.yearsOfExperience,
-			salaryRange: this.state.salaryRange,
-      password: this.state.password
-		});
+
+    if (this.props.user.loggedIn) {
+      this.props.update({
+        name: this.state.name,
+        email: this.state.email,
+        emailPrev: this.state.emailPrev,
+        degree: this.state.degree,
+        domain: this.state.domain,
+        yearsOfExperience: this.state.yearsOfExperience,
+        salaryRange: this.state.salaryRange,
+      }).then((user) => {
+        console.log(user);
+        this.props.history.push('/');
+      });
+    } else {
+      this.props.register({
+        name: this.state.name,
+        email: this.state.email,
+        degree: this.state.degree,
+        domain: this.state.domain,
+        yearsOfExperience: this.state.yearsOfExperience,
+        salaryRange: this.state.salaryRange,
+        password: this.state.password
+      }).then((user) => {
+        console.log(user);
+        this.props.history.push('/');
+      });
+    }
+		
 	}
 
 	getChoices(catagory) {
@@ -78,7 +91,35 @@ class RegisterComponent extends Component{
 		return Object.keys(info).map((keyName, i) => (
 			<Dropdown.Item key={i} onClick={() => this.setState({[catagory] : info[keyName]})}>{info[keyName]}</Dropdown.Item>
 		));
-	}
+  }
+  
+  renderPassword() {
+    if (!this.props.user.loggedIn) {
+      return (
+        <div>
+          <FormGroup controlId="password" bssize="large">
+              <FormLabel>Password</FormLabel>
+              <FormControl
+                autoFocus
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </FormGroup>
+
+        <FormGroup controlId="confirm" bssize="large">
+            <FormLabel>Confirm Password</FormLabel>
+            <FormControl
+              autoFocus
+              type="password"
+              value={this.state.confirm}
+              onChange={this.handleChange}
+            />
+          </FormGroup>
+        </div>
+      );
+    }
+  }
 
   render(){
     let headerText;
@@ -96,11 +137,17 @@ class RegisterComponent extends Component{
       submitText = "Register";
     }
 
+    let degreeText = this.state.degree == '' ? 'Your Degree' : this.state.degree;
+    let domainText = this.state.domain == '' ? 'Your Domain' : this.state.domain;
+    let yearsOfExperienceText = this.state.yearsOfExperience == '' ? 'Your Years of Experience' : this.state.yearsOfExperience;
+    let salaryRangeText = this.state.salaryRange == '' ? 'Your Salary Range' : this.state.salaryRange;
+
+
     return(
 			
       <div className="Login bg-gray">
         <h2> <center> <strong>  {headerText} </strong></center> </h2>
-        <form onSubmit={this.handleSubmit}>
+        <form>
 
 				<FormGroup controlId="name" bssize="large">
             <FormLabel>Name</FormLabel>
@@ -124,7 +171,7 @@ class RegisterComponent extends Component{
 
 					<Dropdown>
 							<Dropdown.Toggle>
-								Your Degree
+								{degreeText}
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu>
@@ -134,7 +181,7 @@ class RegisterComponent extends Component{
 
 						<Dropdown>
 							<Dropdown.Toggle>
-								Your Domain
+								{domainText}
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu>
@@ -144,7 +191,7 @@ class RegisterComponent extends Component{
 
 						<Dropdown>
 							<Dropdown.Toggle>
-								Your Years of Experience
+								{yearsOfExperienceText}
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu>
@@ -155,7 +202,7 @@ class RegisterComponent extends Component{
 
 						<Dropdown>
 							<Dropdown.Toggle>
-								Your Salary Range
+								{salaryRangeText}
 							</Dropdown.Toggle>
 
 							<Dropdown.Menu>
@@ -163,7 +210,12 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
+            {this.renderPassword()}
+
         </form>
+
+        
+
         <br />
         <form className="form-inline my-2 my-lg-1">
           <Button
@@ -193,7 +245,7 @@ function mapStateToProps({user}){
 }
 
 function mapDispatchToProps(dispatch){
-	return bindActionCreators({register}, dispatch);
+	return bindActionCreators({register, update}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(RegisterComponent);
