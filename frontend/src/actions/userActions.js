@@ -9,7 +9,7 @@ export function signIn(user){
   return {
     type: LOGGED_IN,
     payload: request
-  }
+  };
 }
 
 export function register(user){
@@ -18,7 +18,7 @@ export function register(user){
   return {
     type: REGISTER_USER,
     payload: request
-  }
+  };
 }
 
 export function update(user){
@@ -27,11 +27,11 @@ export function update(user){
   return {
     type: UPDATE_USER,
     payload: request
-  }
+  };
 }
 
 export function signOut(){
   return {
     type: LOGGED_OUT
-  }
+  };
 }

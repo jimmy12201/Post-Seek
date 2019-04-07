@@ -1,46 +1,50 @@
 import React, { Component } from 'react';
 import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import TableComponent from './TableComponent'
+import axios from 'axios';
+import {connect} from 'react-redux';
 
 class HomeComponent extends Component {
     constructor(props) {
         super (props);
 
         this.state = {
-            viewTable: false
+            viewTable: false,
+            jobs: []
         };
+
+        this.recommendJobs = this.recommendJobs.bind(this);
+    }
+
+    recommendJobs() {
+        axios.get('http://localhost:8080/job/all')
+        .then((response) =>{
+            this.setState({jobs: response.data.jobs})
+        });
     }
 
     render() {
 
-        const viewTable = this.state.viewTable;
-        let table;
-
-        if (viewTable) {
-            table =  <TableComponent/>
-        } else {
-            table = <h1>no table</h1>
-        }
-
-
+        
         return (
             <div>
                 <div class="form-group">
                     <div class="d-flex justify-content-center">
                         <button id="singlebutton" name="singlebutton" class="btn btn-primary"
-                        onClick={() => this.setState({viewTable: !this.state.viewTable})}>
+                        onClick={this.recommendJobs}>
                         Find Jobs!
                         </button>
                     </div>
                 </div>
 
-                {table}
+                <TableComponent jobs={this.state.jobs}/>
             </div>
-
-            
-            
         );
     }
 }
 
-export default HomeComponent;
+function mapStateToProps({user}){
+	return {user};
+}
+
+export default connect(mapStateToProps)(HomeComponent);

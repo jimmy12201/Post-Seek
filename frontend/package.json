@@ -54,7 +54,6 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "lint": "npx eslint src/**/*.js",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {
@@ -131,6 +130,7 @@
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
+    "react-table": "^6.9.2",
     "redux": "^4.0.1",
     "redux-persist": "^5.10.0",
     "redux-promise": "^0.6.0"

@@ -11,7 +11,6 @@ export default function(state = initialState, action) {
           if(action.error){
             return state;
           }
-          console.log(action.payload.data);
           return {
             loggedIn: true,
             userInfo: action.payload.data

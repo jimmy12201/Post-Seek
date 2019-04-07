@@ -25,6 +25,7 @@ app.use((req, res, next) => {
 });
 
 app.use('/user/', require('./routes/user'));
+app.use('/job/', require('./routes/job'));
 
 app.listen(port, () => {
     console.log(`app is listening on port ${port}`);
