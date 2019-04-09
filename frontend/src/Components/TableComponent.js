@@ -4,7 +4,6 @@ import { Table } from 'react-bootstrap';
 class TableComponent extends Component {
     constructor(props) {
         super(props);
-
     }
 
     renderTable() {
@@ -18,7 +17,10 @@ class TableComponent extends Component {
                     <thead>
                         <tr>
                         <th>Job Name</th>
+                        <th>Description</th>
                         <th>Domain</th>
+                        <th>Years of Experience Recommended</th>
+                        <th>Link to Apply</th>
                         </tr>
                     </thead>
                     <tbody>

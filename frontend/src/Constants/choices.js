@@ -11,9 +11,9 @@ const choices = {
         junior: '1-3 Years'
     },
     salaryRange: {
-        low: '20k - 30k',
-        medium: '70k-80k',
-        high: '100k-120k'
+        low: '1k - 69k',
+        medium: '70k-99k',
+        high: '100k+'
     }
 };
 

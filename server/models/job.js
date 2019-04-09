@@ -8,6 +8,20 @@ const JobSchema = new mongoose.Schema({
     domain: {
         type: String,
         required: true
+    },
+    description: {
+        type: String
+    },
+    yearsOfExperience: {
+        type: String,
+    },
+    salaryRange: {
+        type: String,
+        required: true
+    },
+    usersApplied: {
+        type: Map,
+        of: String
     }
 });
 

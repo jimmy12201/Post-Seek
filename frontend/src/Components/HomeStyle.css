@@ -1,0 +1,23 @@
+#home-section {
+    background: url("../img/home.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#home-section .dark-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+    top: 0;
+    left: 0;
+    width: 100%;
+    min-height: 700px; 
+}
+#home-section .home-inner {
+    padding-top: 150px; 
+}
+#home-section .fa {
+    color: #008ed6;
+    background: #fff;
+    padding: 4px;
+    border-radius: 5px;
+    font-size: 30px; 
+}
