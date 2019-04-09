@@ -22,6 +22,7 @@ class TableComponent extends Component {
                         <th>Years of Experience Recommended</th>
                         <th>Link to Apply</th>
                         </tr>
+                        
                     </thead>
                     <tbody>
                         {this.props.jobs.map((item, i) => {
