@@ -169,6 +169,7 @@ class RegisterComponent extends Component{
             />
           </FormGroup>
 
+          Degree
 					<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{degreeText}
@@ -179,6 +180,7 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
+            Domain
 						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{domainText}
@@ -189,6 +191,7 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
+            Years of Experience
 						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{yearsOfExperienceText}
@@ -199,7 +202,7 @@ class RegisterComponent extends Component{
 							</Dropdown.Menu>
 						</Dropdown>
 
-
+            Salary Range
 						<Dropdown className="form-inline my-2 my-lg-1">
 							<Dropdown.Toggle>
 								{salaryRangeText}

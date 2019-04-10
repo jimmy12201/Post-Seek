@@ -17,6 +17,7 @@ class TableComponent extends Component {
                     <thead>
                         <tr>
                         <th>Job Name</th>
+                        <th>Company</th>
                         <th>Description</th>
                         <th>Domain</th>
                         <th>Years of Experience Recommended</th>
@@ -30,11 +31,12 @@ class TableComponent extends Component {
                             return [
                                 <tr key={i}>
                                     <td>{item.name}</td>
+                                    <td>{item.company}</td>
                                     <td>{item.description}</td>
                                     <td>{item.domain}</td>
                                     <td>{item.yearsOfExperience}</td>
                                     <td>{item.salaryRange}</td>
-                                    <td>{item.applyLink}</td>
+                                    <td><a href={"https://" + item.applyLink}>Apply Here!</a></td>
                                 </tr>
                             ]
                         })}

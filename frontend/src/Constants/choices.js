@@ -12,7 +12,9 @@ const choices = {
     },
     yearsOfExperience: {
         none: 'None',
-        junior: '1 - 3 Years'
+        junior: '1 - 3 Years',
+        experienced: '3 - 7 Years',
+        senior: '8+ Years'
     },
     salaryRange: {
         low: '1k - 69k',

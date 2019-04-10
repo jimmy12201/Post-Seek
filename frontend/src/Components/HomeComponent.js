@@ -64,7 +64,7 @@ class HomeComponent extends Component {
                                     </div>
                                     <div className="d-flex flex-row">
                                     <div className="p-4 align-self-end">
-                                        Job Searching never got easier!
+                                        Job Searching has never been easier!
                                     </div>
                                     </div>
                                 </div>
