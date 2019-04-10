@@ -49,6 +49,7 @@ function addJobs(recJobs, jobs, idSet) {
     for (let i = 0; i < jobs.length; i++) {
         if (!idSet.has(jobs[i].id)) {
             recJobs.push(jobs[i]);
+            idSet.add(jobs[i].id);
         }
     }
 }

@@ -4,15 +4,19 @@ const choices = {
     },
     domain: {
         cloud: 'Cloud Computing',
-        frontend: 'Front End'
+        frontend: 'Front End',
+        backend: 'Back End',
+        fullstack: 'Full Stack',
+        security: 'Security',
+        gameDev: 'Game Development'
     },
     yearsOfExperience: {
         none: 'None',
-        junior: '1-3 Years'
+        junior: '1 - 3 Years'
     },
     salaryRange: {
         low: '1k - 69k',
-        medium: '70k-99k',
+        medium: '70k - 99k',
         high: '100k+'
     }
 };

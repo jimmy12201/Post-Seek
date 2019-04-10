@@ -5,6 +5,9 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    degree: {
+        type: String
+    },
     domain: {
         type: String,
         required: true
@@ -19,9 +22,8 @@ const JobSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    usersApplied: {
-        type: Map,
-        of: String
+    applyLink: {
+        type: String
     }
 });
 

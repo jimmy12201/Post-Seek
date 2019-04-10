@@ -21,7 +21,6 @@ class HomeComponent extends Component {
     recommendJobs() {
         axios.get(`http://localhost:8080/job/${this.props.user.userInfo.email}`)
         .then((response) =>{
-            console.log(response.data);
             this.setState({jobs: response.data.jobs});
         });
     }
