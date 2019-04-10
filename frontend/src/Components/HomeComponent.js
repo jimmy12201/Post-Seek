@@ -49,25 +49,25 @@ class HomeComponent extends Component {
                             <div className="home-inner">
                             <div className="container">
                                 <div className="row">
-                                <div className="col-lg-8 d-none d-lg-block text-white">
-                                    <h1 className="display-4">Build your<strong> Job Profile</strong> and <strong>automate</strong> the job search!</h1>
-                                    <div className="d-flex flex-row">
-                                    <div className="p-4 align-self-end">
-                                        Create an account or sign in and easily find jobs that match to you!
-                                    </div>
-                                    </div>
+                                    <div className="col-lg-8 d-none d-lg-block text-white">
+                                        <h1 className="display-4">Build your<strong> Job Profile</strong> and <strong>automate</strong> the job search!</h1>
+                                        <div className="d-flex flex-row">
+                                        <div className="p-4 align-self-end">
+                                            Create an account or sign in and easily find jobs that match to you!
+                                        </div>
+                                        </div>
 
-                                    <div className="d-flex flex-row">
-                                    <div className="p-4 align-self-end">
-                                        Many domains and jobs to find!
+                                        <div className="d-flex flex-row">
+                                        <div className="p-4 align-self-end">
+                                            Many domains and jobs to find!
+                                        </div>
+                                        </div>
+                                        <div className="d-flex flex-row">
+                                        <div className="p-4 align-self-end">
+                                            Job Searching has never been easier!
+                                        </div>
+                                        </div>
                                     </div>
-                                    </div>
-                                    <div className="d-flex flex-row">
-                                    <div className="p-4 align-self-end">
-                                        Job Searching has never been easier!
-                                    </div>
-                                    </div>
-                                </div>
                                 
                                 </div>
                             </div>
