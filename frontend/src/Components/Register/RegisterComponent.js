@@ -11,7 +11,7 @@ import choices from '../../Constants/choices';
 class RegisterComponent extends Component{
   constructor(props){
     super(props);
-    if (this.props.user.loggedIn) {
+    if (this.props.user.employeeLoggedIn) {
       this.state = {
         name: this.props.user.userInfo.name,
         email: this.props.user.userInfo.email,
@@ -56,7 +56,7 @@ class RegisterComponent extends Component{
 			return console.log('Passwords are not the same');
     }
 
-    if (this.props.user.loggedIn) {
+    if (this.props.user.employeeLoggedIn) {
       this.props.update({
         name: this.state.name,
         email: this.state.email,
@@ -94,7 +94,7 @@ class RegisterComponent extends Component{
   }
   
   renderPassword() {
-    if (!this.props.user.loggedIn) {
+    if (!this.props.user.employeeLoggedIn) {
       return (
         <div>
           <FormGroup controlId="password" bssize="large">
@@ -124,14 +124,14 @@ class RegisterComponent extends Component{
   render(){
     let headerText;
 
-    if (this.props.user.loggedIn) {
+    if (this.props.user.employeeLoggedIn) {
       headerText = "Profile";
     } else {
       headerText = "Post-Seek Registration";
     }
 
     let submitText;
-    if (this.props.user.loggedIn) {
+    if (this.props.user.employeeLoggedIn) {
       submitText = "Update Profile";
     } else {
       submitText = "Register";

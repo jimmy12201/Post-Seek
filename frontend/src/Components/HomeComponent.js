@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
-import TableComponent from './TableComponent'
-import axios from 'axios';
-import {connect} from 'react-redux';
+import EmployerHomeComponent from './EmployerHomeComponent';
+import EmployeeHomeComponent from './EmployeeHomeComponent'
+import { connect } from 'react-redux';
 import './HomeStyle.css';
 
 class HomeComponent extends Component {
@@ -10,38 +9,19 @@ class HomeComponent extends Component {
         super (props);
 
         this.state = {
-            viewTable: false,
             jobs: []
         };
-
-        this.recommendJobs = this.recommendJobs.bind(this);
         this.renderHomeView = this.renderHomeView.bind(this);
+        console.log(this.props.user.employerLoggedIn);
     }
 
-    recommendJobs() {
-        axios.get(`http://localhost:8080/job/${this.props.user.userInfo.email}`)
-        .then((response) =>{
-            this.setState({jobs: response.data.jobs});
-        });
-    }
 
     renderHomeView() {
-        if (this.props.user.loggedIn) {
-            return (
-                <div>
-                    <div className="form-group">
-                        <div className="d-flex justify-content-center">
-                            <button id="singlebutton" name="singlebutton" className="btn btn-primary"
-                            onClick={this.recommendJobs}>
-                            Find Jobs!
-                            </button>
-                        </div>
-                    </div>
-            
-                    <TableComponent jobs={this.state.jobs}/>
-                </div>
-                );
-        } else {
+        if (this.props.user.employeeLoggedIn) {
+            return <EmployeeHomeComponent/>
+        } else if(this.props.user.employerLoggedIn) {
+            return <EmployerHomeComponent/>
+        }else {
             return (
                 <div>
                     <header id="home-section">
@@ -80,12 +60,8 @@ class HomeComponent extends Component {
     }
 
     render() {
-
-        
         return (
             <div>
-                
-
                 {this.renderHomeView()}
             </div>
         );

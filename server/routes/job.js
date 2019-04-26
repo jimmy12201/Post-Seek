@@ -20,17 +20,17 @@ router.get('/:email', (req, res) => {
     let idSet = new Set();
     User.findOne({
         email: req.params.email
-    }).then((user) => {
-        Job.find({domain: user.domain,
-            yearsOfExperience: user.yearsOfExperience,
-            salaryRange: user.salaryRange
+    }).then((User) => {
+        Job.find({domain: User.domain,
+            yearsOfExperience: User.yearsOfExperience,
+            salaryRange: User.salaryRange
         }).then((jobs) => {
             addJobs(recJobs, jobs, idSet);
-            Job.find({domain: user.domain,
-                yearsOfExperience: user.yearsOfExperience
+            Job.find({domain: User.domain,
+                yearsOfExperience: User.yearsOfExperience
             }).then((jobs) => {
                 addJobs(recJobs, jobs, idSet);
-                Job.find({domain: user.domain})
+                Job.find({domain: User.domain})
                 .then((jobs) => {
                     addJobs(recJobs, jobs, idSet);
                     Job.find().then((jobs) => {

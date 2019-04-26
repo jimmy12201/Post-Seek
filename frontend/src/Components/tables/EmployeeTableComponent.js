@@ -1,13 +1,9 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 
-class TableComponent extends Component {
+class EmployeeTableComponent extends Component {
     constructor(props) {
         super(props);
-    }
-
-    renderTable() {
-        
     }
 
     render() {
@@ -24,7 +20,6 @@ class TableComponent extends Component {
                         <th>Salary Range</th>
                         <th>Link to Apply</th>
                         </tr>
-                        
                     </thead>
                     <tbody>
                         {this.props.jobs.map((item, i) => {
@@ -47,4 +42,4 @@ class TableComponent extends Component {
     }
 }
 
-export default TableComponent;
+export default EmployeeTableComponent;

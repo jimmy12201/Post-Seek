@@ -10,6 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import LoginComponent from './Components/Login/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
+import RegisterEmployerComponent from './Components/Register/RegisterEmployerComponent';
 import ProfileComponent from './Components/ProfileComponent';
 
 import { store, persistor } from './configureStore';
@@ -24,6 +25,7 @@ ReactDOM.render(
                         <Route exact path="/" component={App}/>
                         <Route exact path="/login" component={LoginComponent} />
                         <Route exact path="/register" component={RegisterComponent} />
+                        <Route exact path="/registerEmployer" component={RegisterEmployerComponent} />
                         <Route exact path="/profile" component={ProfileComponent} />
                     </Switch>
                 </div>

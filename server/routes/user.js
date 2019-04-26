@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
+const Employer = require('../models/employer');
 
 router.get('/', (req, res) => {
     res.send('users');
@@ -34,12 +35,26 @@ router.post('/register', (req, res) => {
     });
 });
 
+router.post('/registerEmployer', (req, res) => {
+    let employer = new Employer({
+        name: req.body.name,
+        password: req.body.password
+    });
+
+    employer.save().then((employer) => {
+        res.send(employer);
+    }).catch((e) => {
+        console.log(e);
+        res.status(400).send();
+    });
+});
+
 router.put('/update', (req, res) => {
     
     User.findOne({
         email: req.body.emailPrev
-    }).then((user) => {
-        User.findByIdAndUpdate(user._id, {$set: {
+    }).then((User) => {
+        User.findByIdAndUpdate(User._id, {$set: {
             name: req.body.name,
             email : req.body.email,
             degree: req.body.degree,
@@ -47,30 +62,47 @@ router.put('/update', (req, res) => {
             yearsOfExperience: req.body.yearsOfExperience,
             salaryRange: req.body.salaryRange
         }}, {new: true})
-    .then((user) => {
-        if (!user) {
+    .then((User) => {
+        if (!User) {
             return res.status(404).send();
         }
 
-        return res.send(user);
+        return res.send(User);
     }).catch((err) => {
         res.status(400).send(e);
     })});
 
 });
 
-router.post('/signIn', (req, res) => {
+router.post('/signInEmployee', (req, res) => {
     User.findOne({
         email: req.body.email,
         password: req.body.password
-    }).then((user) => {
-        if (!user) {
+    }).then((User) => {
+        if (!User) {
             return res.status(404).send({
                 error: "User not found"
             });
         }
 
-        res.send(user);
+        res.send(User);
+    }).catch((e) => {
+        res.status(404).send(e);
+    });
+});
+
+router.post('/signInEmployer', (req, res) => {
+    Employer.findOne({
+        name: req.body.name,
+        password: req.body.password
+    }).then((Employer) => {
+        if (!Employer) {
+            return res.status(404).send({
+                error: "User not found"
+            });
+        }
+
+        res.send(Employer);
     }).catch((e) => {
         res.status(404).send(e);
     });

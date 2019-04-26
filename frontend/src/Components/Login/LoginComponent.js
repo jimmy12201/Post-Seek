@@ -4,7 +4,7 @@ import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router';
 import { bindActionCreators } from 'redux';
-import { signIn } from '../../actions/userActions';
+import { signInEmployee, signInEmployer } from '../../actions/userActions';
 import "./login.css";
 
 
@@ -19,6 +19,7 @@ class LoginComponent extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.signInEmployer = this.signInEmployer.bind(this);
   }
 
   validateForm() {
@@ -31,27 +32,29 @@ class LoginComponent extends Component {
     });
   }
 
+  signInEmployer() {
+    this.props.signInEmployer(this.state).then(() => {
+      this.props.history.push('/');
+    });
+  }
+
   handleSubmit(event) {
     event.preventDefault();
-    this.props.signIn(this.state).then(() => {
+    this.props.signInEmployee(this.state).then(() => {
       this.props.history.push('/');
     });
   }
 
   render() {
-
-    // if(this.props.user.isLoggedIn){
-    //   return <Redirect to="/" />
-    // }
     return (
       <div className="Login bg-light">
         <h2> <center> <strong> Post-Seek login  </strong></center> </h2>
         <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
-            <FormLabel>Email</FormLabel>
+            <FormLabel>Email / Company</FormLabel>
             <FormControl
               autoFocus
-              type="email"
+              type="text"
               value={this.state.email}
               onChange={this.handleChange}
             />
@@ -68,16 +71,29 @@ class LoginComponent extends Component {
             block
             bsSize="large"
             type="submit">
-            Login
+            Login as Employee
           </Button>
+          <Button
+            onClick={this.signInEmployer}
+            block
+            bsSize="large">
+            Login as Employer
+          </Button>
+
         </form>
         <br />
         <form className="form-inline my-2 my-lg-1">
-          <Link to="/Register"><Button
+          <Link to="/register"><Button
             block
             bsSize = "medium"
             type="Register">
-            Register
+            Register Employee
+          </Button></Link>
+          <Link to="/registerEmployer"><Button
+            block
+            bsSize = "medium"
+            type="Register">
+            Register Employer
           </Button></Link>
         </form>
         <form className="form-inline my-2 my-lg-0">
@@ -99,7 +115,7 @@ function mapStateToProps({user}){
 }
 
 function mapDispatchToProps(dispatch){
-  return bindActionCreators({signIn}, dispatch);
+  return bindActionCreators({signInEmployee, signInEmployer}, dispatch);
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginComponent);

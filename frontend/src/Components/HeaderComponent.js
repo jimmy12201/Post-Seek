@@ -24,17 +24,26 @@ class HeaderComponent extends Component {
     }
 
     
-    renderSignIn() {
-        if (this.props.user.loggedIn) {
+    rendersignInEmployeeEmployee() {
+        if (this.props.user.employeeLoggedIn) {
             return (
                 <div>
                     <span><strong>{this.props.user.userInfo.name}</strong></span>
                     <form className="form-inline my-2 my-lg-0">
-                    <button onClick={this.goToProfile} className="btn btn-outline-success my-2 my-sm-0 m-2" type="submit">Profile</button>
-                    <button onClick={() => this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
-                  </form>
+                      <button onClick={this.goToProfile} className="btn btn-outline-success my-2 my-sm-0 m-2" type="submit">Profile</button>
+                      <button onClick={() => this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
+                    </form>
                 </div>
             )
+        } else if (this.props.user.employerLoggedIn) {
+                  return (
+                    <div>
+                      <span><strong>{this.props.user.userInfo.name}</strong></span>
+                        <form className="form-inline my-2 my-lg-0">
+                        <button onClick={() => this.props.signOut()} className="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
+                        </form>
+                    </div>
+                  )
         } else {
             return(
                 <form className="form-inline my-2 my-lg-0">
@@ -56,7 +65,7 @@ class HeaderComponent extends Component {
                   <ul className="navbar-nav mr-auto">
     
                   </ul>
-                  {this.renderSignIn()}
+                  {this.rendersignInEmployeeEmployee()}
                 </div>
             </nav>
           </div>

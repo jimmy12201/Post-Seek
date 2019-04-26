@@ -8,6 +8,10 @@ const JobSchema = new mongoose.Schema({
     degree: {
         type: String
     },
+    company: {
+        type: String,
+        required: true
+    },
     domain: {
         type: String,
         required: true

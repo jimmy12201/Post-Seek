@@ -1,39 +1,41 @@
-import { LOGGED_IN, LOGGED_OUT, REGISTER_USER, UPDATE_USER } from '../actions/actionTypes.js';
+import { EMPLOYEE_LOGGED_IN, EMPLOYER_LOGGED_IN, LOGGED_OUT, REGISTER_EMPLOYEE, UPDATE_EMPLOYEE } from '../actions/actionTypes.js';
 
 const initialState = {
-    loggedIn: false,
+    employeeLoggedIn: false,
+    employerLoggedIn: false,
     userInfo: {}
 };
 
 export default function(state = initialState, action) {
-    switch(action.type){
-        case LOGGED_IN:
-          if(action.error){
-            return state;
-          }
+    if (action.error) {
+      return state;
+    }
+    console.log(action.type);
+    switch(action.type) {
+        case EMPLOYEE_LOGGED_IN:
           return {
-            loggedIn: true,
+            employeeLoggedIn: true,
             userInfo: action.payload.data
           };
+        case EMPLOYER_LOGGED_IN:
+          return {
+              employerLoggedIn: true,
+              userInfo: action.payload.data
+          }
         case LOGGED_OUT:
           return {
-            loggedIn: false,
+            employeeLoggedIn: false,
+            employerLoggedIn: false,
             userInfo: {}
           };
-        case REGISTER_USER:
-          if(action.error){
-            return state;
-          }
+        case REGISTER_EMPLOYEE:
           return {
-            loggedIn: true,
+            employeeLoggedIn: true,
             userInfo: action.payload.data
           };
-        case UPDATE_USER:
-          if(action.error){
-            return state;
-          }
+        case UPDATE_EMPLOYEE:
           return {
-            loggedIn: true,
+            employeeLoggedIn: true,
             userInfo: action.payload.data
           };
         default:
