@@ -1,4 +1,4 @@
-import {EMPLOYEE_LOGGED_IN, EMPLOYER_LOGGED_IN, LOGGED_OUT, REGISTER_EMPLOYEE, UPDATE_EMPLOYEE} from './actionTypes';
+import {EMPLOYEE_LOGGED_IN, EMPLOYER_LOGGED_IN, LOGGED_OUT, REGISTER_EMPLOYEE, UPDATE_EMPLOYEE, CREATE_JOB} from './actionTypes';
 import axios from 'axios';
 
 const ROOT_URL = 'http://localhost:8080/user';
@@ -47,6 +47,16 @@ export function update(user){
     payload: request
   };
 }
+
+export function createJob(job){
+  const url = `${ROOT_URL}/job`;
+  const request = axios.post(url,job);
+  return {
+    type: CREATE_JOB,
+    payload: request
+  };
+}
+
 
 export function signOut(){
   return {
