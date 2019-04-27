@@ -78,14 +78,14 @@ router.post('/signInEmployee', (req, res) => {
     User.findOne({
         email: req.body.email,
         password: req.body.password
-    }).then((User) => {
-        if (!User) {
+    }).then((user) => {
+        if (!user) {
             return res.status(404).send({
                 error: "User not found"
             });
         }
 
-        res.send(User);
+        res.send(user);
     }).catch((e) => {
         res.status(404).send(e);
     });
@@ -93,16 +93,16 @@ router.post('/signInEmployee', (req, res) => {
 
 router.post('/signInEmployer', (req, res) => {
     Employer.findOne({
-        name: req.body.name,
+        name: req.body.email,
         password: req.body.password
-    }).then((Employer) => {
-        if (!Employer) {
+    }).then((employer) => {
+        if (!employer) {
             return res.status(404).send({
                 error: "User not found"
             });
         }
 
-        res.send(Employer);
+        res.send(employer);
     }).catch((e) => {
         res.status(404).send(e);
     });

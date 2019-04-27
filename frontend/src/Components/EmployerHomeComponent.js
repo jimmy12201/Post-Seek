@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 class EmployerHomeComponent extends Component {
     constructor(props) {
         super(props);
+        console.log(this.props);
         this.state = {
             jobs: [
                 {
@@ -13,12 +14,27 @@ class EmployerHomeComponent extends Component {
                 }
             ]
         }
+
+        this.goToCreateJob = this.goToCreateJob.bind(this);
     }
+
+    goToCreateJob(event) {
+        event.preventDefault();
+        this.props.history.push('/createJob');
+      }
 
     render() {
         return(
             <div>
                 <h1>Employer View</h1>
+                <div className="form-group">
+                    <div className="d-flex justify-content-center">
+                        <button id="singlebutton" name="singlebutton" className="btn btn-primary"
+                        onClick={this.goToCreateJob}>
+                        Create a Job!
+                        </button>
+                    </div>
+                </div>
             </div>
         )
     }

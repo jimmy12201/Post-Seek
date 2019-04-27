@@ -6,10 +6,10 @@ import axios from 'axios';
 class EmployeeHomeComponent extends Component {
     constructor(props) {
         super(props);
-        this.recommendJobs = this.recommendJobs.bind(this);
         this.state = {
             jobs: []
         };
+        this.recommendJobs = this.recommendJobs.bind(this);
     }
 
 

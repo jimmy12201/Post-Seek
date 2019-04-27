@@ -7,12 +7,12 @@ import './HomeStyle.css';
 class HomeComponent extends Component {
     constructor(props) {
         super (props);
+        console.log(props);
 
         this.state = {
             jobs: []
         };
         this.renderHomeView = this.renderHomeView.bind(this);
-        console.log(this.props.user.employerLoggedIn);
     }
 
 
@@ -20,7 +20,7 @@ class HomeComponent extends Component {
         if (this.props.user.employeeLoggedIn) {
             return <EmployeeHomeComponent/>
         } else if(this.props.user.employerLoggedIn) {
-            return <EmployerHomeComponent/>
+            return <EmployerHomeComponent history={this.props.history}/>
         }else {
             return (
                 <div>

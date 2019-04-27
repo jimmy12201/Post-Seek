@@ -10,7 +10,6 @@ export default function(state = initialState, action) {
     if (action.error) {
       return state;
     }
-    console.log(action.type);
     switch(action.type) {
         case EMPLOYEE_LOGGED_IN:
           return {

@@ -12,6 +12,7 @@ import LoginComponent from './Components/Login/LoginComponent';
 import RegisterComponent from './Components/Register/RegisterComponent';
 import RegisterEmployerComponent from './Components/Register/RegisterEmployerComponent';
 import ProfileComponent from './Components/ProfileComponent';
+import CreateJobComponent from './Components/Job/CreateJobComponent';
 
 import { store, persistor } from './configureStore';
 
@@ -27,6 +28,7 @@ ReactDOM.render(
                         <Route exact path="/register" component={RegisterComponent} />
                         <Route exact path="/registerEmployer" component={RegisterEmployerComponent} />
                         <Route exact path="/profile" component={ProfileComponent} />
+                        <Route exact path="/createJob" component={CreateJobComponent} />
                     </Switch>
                 </div>
             </BrowserRouter>
