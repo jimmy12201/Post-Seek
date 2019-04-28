@@ -14,7 +14,6 @@ class EmployerTableComponent extends Component {
                     <thead>
                         <tr>
                         <th>Job Name</th>
-                        <th>Company</th>
                         <th>Description</th>
                         <th>Domain</th>
                         <th>Years of Experience Recommended</th>
@@ -27,7 +26,6 @@ class EmployerTableComponent extends Component {
                             return [
                                 <tr key={i}>
                                     <td>{item.name}</td>
-                                    <td>{item.company}</td>
                                     <td>{item.description}</td>
                                     <td>{item.domain}</td>
                                     <td>{item.yearsOfExperience}</td>

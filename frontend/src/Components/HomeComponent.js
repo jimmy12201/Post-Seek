@@ -7,7 +7,6 @@ import './HomeStyle.css';
 class HomeComponent extends Component {
     constructor(props) {
         super (props);
-        console.log(props);
 
         this.state = {
             jobs: []

@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'; 
+import { connect } from 'react-redux';
+import axios from 'axios';
+import EmployerTableComponent from './tables/EmployerTableComponent';
 
 class EmployerHomeComponent extends Component {
     constructor(props) {
         super(props);
-        console.log(this.props);
         this.state = {
-            jobs: [
-                {
-                    name: 'job1'
-                }, {
-                    name: 'job2'
-                }
-            ]
-        }
+            jobs: []
+        };
+        
+        axios.get(`http://localhost:8080/job/company/${this.props.user.userInfo.name}`)
+        .then((response) =>{
+            console.log(response.data);
+            this.setState({jobs: response.data.jobs});
+        });
+        
+
 
         this.goToCreateJob = this.goToCreateJob.bind(this);
     }
@@ -21,7 +24,7 @@ class EmployerHomeComponent extends Component {
     goToCreateJob(event) {
         event.preventDefault();
         this.props.history.push('/createJob');
-      }
+    }
 
     render() {
         return(
@@ -34,6 +37,8 @@ class EmployerHomeComponent extends Component {
                         Create a Job!
                         </button>
                     </div>
+                    
+                    <EmployerTableComponent jobs = {this.state.jobs} />
                 </div>
             </div>
         )

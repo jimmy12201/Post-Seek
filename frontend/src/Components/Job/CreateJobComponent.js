@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router-dom';
 import './JobStyle.css';
-import {createJob} from '../../actions/userActions';
+import {createJob} from '../../actions/jobActions';
 import {connect} from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Button, FormGroup, FormControl, FormLabel, Dropdown } from 'react-bootstrap';
@@ -22,15 +22,11 @@ class CreateJobComponent extends Component {
       userInformation: choices
     };
 
-    console.log(this.props);
-    
-
     this.createJob = this.createJob.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
 
 handleChange(event) {
-  console.log(event.target);
   this.setState({
     [event.target.id]: event.target.value
   });

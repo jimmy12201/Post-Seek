@@ -53,8 +53,8 @@ router.put('/update', (req, res) => {
     
     User.findOne({
         email: req.body.emailPrev
-    }).then((User) => {
-        User.findByIdAndUpdate(User._id, {$set: {
+    }).then((user) => {
+        User.findByIdAndUpdate(user._id, {$set: {
             name: req.body.name,
             email : req.body.email,
             degree: req.body.degree,
@@ -62,12 +62,12 @@ router.put('/update', (req, res) => {
             yearsOfExperience: req.body.yearsOfExperience,
             salaryRange: req.body.salaryRange
         }}, {new: true})
-    .then((User) => {
-        if (!User) {
-            return res.status(404).send();
-        }
+        .then((user) => {
+            if (!user) {
+                return res.status(404).send();
+            }
 
-        return res.send(User);
+            return res.send(user);
     }).catch((err) => {
         res.status(400).send(e);
     })});
