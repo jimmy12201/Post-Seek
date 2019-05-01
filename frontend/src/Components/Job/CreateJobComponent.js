@@ -74,7 +74,7 @@ render(){
       <form onSubmit={this.createJob}>
 
       <FormGroup controlId="name" bssize="large">
-          <FormLabel>Name</FormLabel>
+          <FormLabel>Job Title</FormLabel>
           <FormControl
             autoFocus
             type="text"
@@ -135,7 +135,6 @@ render(){
           <FormGroup controlId="applyLink" bssize="large">
           <FormLabel>Application Link</FormLabel>
           <FormControl
-            autoFocus
             type="text"
             value={this.state.applyLink}
             onChange={this.handleChange}
